@@ -33,21 +33,11 @@ jobs:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   path: test-repo
 
-            - name: "Git log test-repo"
-              run: |
-                  cd test-repo
-                  git log -n1
-
             - name: "Checkout automation-reports (${{ github.ref }}) - main repo"
               uses: actions/checkout@v5
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   path: main-repo
-
-            - name: "Git log main-repo"
-              run: |
-                  cd main-repo
-                  git log -n1
 
             - name: "Set up Python"
               uses: actions/setup-python@v5
