@@ -1,0 +1,2 @@
+dumb-init==1.2.5
+redis==7.0.1
