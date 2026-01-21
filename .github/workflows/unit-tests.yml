@@ -7,27 +7,27 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:15  # or any version you need
-        env:
-          POSTGRES_USER: rootuser
-          POSTGRES_PASSWORD: rootpass
-          POSTGRES_DB: maindb
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd="pg_isready -U rootuser"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
+    # services:
+    #   postgres:
+    #     image: postgres:15  # or any version you need
+    #     env:
+    #       POSTGRES_USER: rootuser
+    #       POSTGRES_PASSWORD: rootpass
+    #       POSTGRES_DB: maindb
+    #     ports:
+    #       - 5432:5432
+    #     options: >-
+    #       --health-cmd="pg_isready -U rootuser"
+    #       --health-interval=10s
+    #       --health-timeout=5s
+    #       --health-retries=5
     env:
       DATABASE_URL: postgres://testuser:testpass@localhost:5432/aapdashboard
     steps:
-      - name: Setup DB
-        run: |
-          until pg_isready -h localhost -p 5432 -U rootuser; do sleep 1; echo "Waiting on DB..."; done
-          PGPASSWORD=rootpass psql -h localhost -U rootuser -d postgres -c "CREATE USER testuser WITH PASSWORD 'testpass' CREATEDB;"
+      # - name: Setup DB
+      #   run: |
+      #     until pg_isready -h localhost -p 5432 -U rootuser; do sleep 1; echo "Waiting on DB..."; done
+      #     PGPASSWORD=rootpass psql -h localhost -U rootuser -d postgres -c "CREATE USER testuser WITH PASSWORD 'testpass' CREATEDB;"
 
       - name: Checkout
         uses: actions/checkout@v4
